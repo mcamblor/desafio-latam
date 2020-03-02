@@ -25,7 +25,7 @@ class ServiceBirthday(Resource):
             _name = str(args['name'])
             _born = str(args['born'])
             try:
-                if hd.validateDate(_born):
+                if isinstance(hd.validateDate(_born),str) == False & hd.validateDate(_born):
                     resp = jsonify(
                         nombre=_name.split(' ')[0],
                         apellido=_name.split(' ')[1],
@@ -49,4 +49,4 @@ class ServiceBirthday(Resource):
 api.add_resource(ServiceBirthday, '/birthday')
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=True,host='127.0.0.1')
