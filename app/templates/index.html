@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Desafio Latam</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+</html>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light"style="background-color: #1b0088;">
+        <a class="navbar-brand" style="color:white;" href="http://0.0.0.0:5000">
+            <img src="{{ url_for('static', filename='img/logo-latam.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Desafio Latam
+        </a>
+    </nav>
+    <div class="container">
+        <div class="row"><hr></div>
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Formulario ingreso Variables</h2>
+                <hr></hr>
+                <form id="form_birthday" class="needs-validation" novalidate>
+                    <div class="form-group">
+                      <label for="name">Ingresa tu Nombre</label>
+                      <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Ej Matias Camblor" required>
+                      <small id="nameHelp" class="form-text text-muted">Ingresa primer nombre y primer apellido</small>
+                      <div class="invalid-feedback">
+                        Error, ingresa sólo tu primer nombre y apellido.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="born">Fecha de Nacimiento</label>
+                      <input type="text" class="form-control" id="born" aria-describedby="nameHelp" placeholder="Ej. 30-12-1987" required>
+                      <small id="bornHelp" class="form-text text-muted">Formato fecha DD-MM-YYYY</small>
+                      <div class="invalid-feedback">
+                        Error, ingresa una fecha con el formato correspondiente
+                      </div>
+                    </div>
+                    <button type="submit" id="callService" class="btn btn-primary">Consultar</button>
+                  </form>
+            </div>
+        </div>
+        <div class="row"><hr></div>
+        <div class="row align-items-center">
+            <div id="result_birthday" class="col" style="display: none;">
+                <h2>Resultado de Cumpleaños:</h2>
+                <hr></hs>
+                <form>
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label for="nameR">Nombre</label>
+                            <input type="text" class="form-control" id="nameR">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastnameR">Apellido</label>
+                            <input type="text" class="form-control" id="lastnameR">
+                        </div>
+                        <div class="form-group">
+                            <label for="ageR">Edad</label>
+                            <input type="text" class="form-control" id="ageR">
+                        </div>
+                        <div class="form-group">
+                            <label for="bornR">Fecha Nacimiento</label>
+                            <input type="text" class="form-control" id="bornR">
+                        </div>
+                        <div class="form-group">
+                            <label for="messageR">Mensaje</label>
+                            <textarea id="messageR" class="form-control" rows="10" cols="50"></textarea>
+                    </div>
+                    </fieldset>
+                </form>
+                <img src="{{ url_for('static', filename='img/logo-latam.svg') }}" alt="Feliz Cumpleaños" class="img-thumbnail">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script>
+        (function() {
+            //'use strict';
+            
+            $( "#callService" ).click(function() {
+                $( "#result_birthday" ).show( "slow");
+            });
+            
+            $("#form_birthday").submit(function(event){
+                event.preventDefault(); //prevent default action 
+                var form_data = new FormData();
+                form_data.append('name',$('#name').val());
+                form_data.append('born',$('#born').val());
+                $.ajax({
+                    url : 'http://0.0.0.0:5000/birthday',
+                    type: 'POST',
+                    data : form_data,
+                    contentType: false,
+                    processData:false,
+                    success: function(data) {
+                        $('#nameR').val(data['nombre']);
+                        $('#lastnameR').val(data['apellido']);
+                        $('#ageR').val(data['edad']);
+                        $('#bornR').val(data['fecha']);
+                        $('#messageR').val(data['poem']);
+                        console.log('success: '+data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        $('#nameR').val('Error');
+                        $('#lastnameR').val('Error');
+                        $('#ageR').val('Error');
+                        $('#bornR').val('Error');
+                        $('#messageR').val($.parseJSON(jqXHR.responseText)['error']);
+                        console.log('Error: '+$.parseJSON(jqXHR.responseText)['error']);
+                    }
+                });
+            });
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false ) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        //if(/^[A-Z][a-z]{0,19}[\s,][A-Z][a-z]{0,19}$/.test($('#name').val())){
+                            //if(/^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\d{4}$/.test($('#born').val())){
+                                form.classList.add('was-validated');
+                            //}  
+                        //}                        
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
