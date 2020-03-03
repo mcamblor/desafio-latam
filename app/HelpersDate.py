@@ -9,15 +9,16 @@ import random
 ## Function helper to service
 ##
 def validateDate(date_text):
+    isValidDate = True
     try:
         day,month,year = date_text.split('-')
-        isValidDate = True
+        datetime.datetime(int(year),int(month),int(day))
     except ValueError:
         isValidDate = 'Debe usar delimitador de fecha "-"'
-    try:
+    """ try:
         datetime.datetime(int(year),int(month),int(day))
     except ValueError :
-        isValidDate = False
+        isValidDate = False """
 
     return isValidDate
 
@@ -38,7 +39,7 @@ def daysMissing(date_text):
             day_missing = 'Faltan {} días para tu cumpleaños'.format((birthday - t_date).days + 1)
             #day_missing = 'Tu cumpleaños ya paso'
     except ValueError:
-        day_missing = 'Error al procesar fecha, debe utilizar delimitador "-".'
+        day_missing = 'Error al procesar fecha.'
         
     return day_missing
 
@@ -50,7 +51,7 @@ def callPoem():
         #print('consume api poemas')
         rand_poem = random.randrange(0,len(json_data))
         #print('Title: {}, Poem: {}'.format(json_data[rand_poem]['title'],json_data[rand_poem]['content']))
-        message_poem = json_data[rand_poem]['content']
+        message_poem = 'Feliz Cumpleaños, te regalamos un poema: \nTítulo: {}\nPoema: {}'.format(json_data[rand_poem]['title'],json_data[rand_poem]['content'])
     except requests.exceptions.Timeout:
         # Maybe set up for a retry, or continue in a retry loop
         message_poem='Error Poem Api Timeout.'

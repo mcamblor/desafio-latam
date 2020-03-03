@@ -1,0 +1,9 @@
+name,born, expected_message
+firstname11 lastname11,02-02-1982,Persona agregada a la base de datos!
+firstname21 lastname21,03-03-1983,Persona agregada a la base de datos!
+firstname31 lastname31,04-04-1984,Persona agregada a la base de datos!
+firstname41 lastname41,05-05-1985,Persona agregada a la base de datos!
+firstname51 lastname51,02-20-1980,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+firstname61 lastname61,02/06/1986,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+firstname71 lastname71,03/08-1987,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+Matias Camblot,30-12-1987,Persona ya existe!

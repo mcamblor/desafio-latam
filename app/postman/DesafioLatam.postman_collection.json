@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "14438cad-4e92-499b-92a2-467f51075e4f",
+		"name": "DesafioLatam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/get-people-id/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/get-people-id/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"get-people-id",
+						"1"
+					]
+				},
+				"description": "Metodo para consultar por el detalle de un usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/birthday",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "basic_test postBirthday",
+							"type": "text"
+						},
+						{
+							"key": "born",
+							"value": "02-02-1930",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/birthday",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"birthday"
+					]
+				},
+				"description": "Metodo para insertar registro de consulta al serivicio."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/get-people",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/get-people",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"get-people"
+					]
+				},
+				"description": "Metodo para consultar listado de usuarios consultados."
+			},
+			"response": []
+		}
+	]
+}

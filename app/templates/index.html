@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 	<title>Desafio Latam</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap-table.min.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 </head>
 </html>
@@ -45,33 +46,23 @@
         <div class="row"><hr></div>
         <div class="row align-items-center">
             <div id="result_birthday" class="col" style="display: none;">
-                <h2>Resultado de Cumpleaños:</h2>
-                <hr></hs>
-                <form>
-                    <fieldset disabled>
-                        <div class="form-group">
-                            <label for="nameR">Nombre</label>
-                            <input type="text" class="form-control" id="nameR">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastnameR">Apellido</label>
-                            <input type="text" class="form-control" id="lastnameR">
-                        </div>
-                        <div class="form-group">
-                            <label for="ageR">Edad</label>
-                            <input type="text" class="form-control" id="ageR">
-                        </div>
-                        <div class="form-group">
-                            <label for="bornR">Fecha Nacimiento</label>
-                            <input type="text" class="form-control" id="bornR">
-                        </div>
-                        <div class="form-group">
-                            <label for="messageR">Mensaje</label>
-                            <textarea id="messageR" class="form-control" rows="10" cols="50"></textarea>
-                    </div>
-                    </fieldset>
-                </form>
-                <img src="{{ url_for('static', filename='img/logo-latam.svg') }}" alt="Feliz Cumpleaños" class="img-thumbnail">
+                <div class="table-responsive">
+                    <table id="tablePeople" class="table">
+                        <thead>
+                            <tr>
+                                <th data-field="id" scope="col">ID</th>
+                                <th data-field="first_name" scope="col">Nombre</th>
+                                <th data-field="lastname" scope="col">Apellido</th>
+                                <th data-field="age" scope="col">Edad</th>
+                                <th data-field="new_birthday" scope="col">Fecha Nacimiento</th>
+                                <th data-field="message" scope="col">Mensaje</th>
+                            </tr>
+                            <tbody>
+                                
+                            </tbody>
+                          </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -79,8 +70,10 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-table.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-table-es-CL.min.js') }}"></script>
     <script>
         (function() {
             //'use strict';
@@ -100,21 +93,27 @@
                     data : form_data,
                     contentType: false,
                     processData:false,
-                    success: function(data) {
-                        $('#nameR').val(data['nombre']);
-                        $('#lastnameR').val(data['apellido']);
-                        $('#ageR').val(data['edad']);
-                        $('#bornR').val(data['fecha']);
-                        $('#messageR').val(data['poem']);
-                        console.log('success: '+data);
+                    success: function(response,textStatus,jqXHR) {
+                        //console.log('success: '+response['people']+', textStatus: '+textStatus+', code: '+jqXHR.status);
+                        if (jqXHR.status == 200) {
+                            $.ajax({
+                                url: 'http://127.0.0.1:5000/get-people',
+                                type: 'GET',
+                                data: '',
+                                contentType: false,
+                                processData: false,
+                                success: function(responseGet){
+                                    $('#tablePeople').bootstrapTable({data: responseGet['people']});
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    alert('Error: '+$.parseJSON(jqXHR.responseText)['error']);
+                                }
+                            });
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
-                        $('#nameR').val('Error');
-                        $('#lastnameR').val('Error');
-                        $('#ageR').val('Error');
-                        $('#bornR').val('Error');
-                        $('#messageR').val($.parseJSON(jqXHR.responseText)['error']);
-                        console.log('Error: '+$.parseJSON(jqXHR.responseText)['error']);
+                        alert('Error: '+$.parseJSON(jqXHR.responseText)['error']);
+                        console.log($.parseJSON(jqXHR.responseText)['error']);
                     }
                 });
             });
