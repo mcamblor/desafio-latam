@@ -17,6 +17,40 @@
         </a>
     </nav>
     <div class="container">
+        <!-- Modal -->
+        <div class="modal" id="empModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Resultado API</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="tableResultApi" class="table">
+                            <thead>
+                                <tr>
+                                    <th data-field="firstname" scope="col">Nombre</th>
+                                    <th data-field="lastname" scope="col">Apellido</th>
+                                    <th data-field="age" scope="col">Edad</th>
+                                    <th data-field="date" scope="col">Fecha Nacimiento</th>
+                                    <th data-field="text" scope="col">Mensaje</th>
+                                </tr>
+                                <tbody>
+                                    
+                                </tbody>
+                              </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
         <div class="row"><hr></div>
         <div class="row align-items-center">
             <div class="col">
@@ -94,7 +128,12 @@
                     contentType: false,
                     processData:false,
                     success: function(response,textStatus,jqXHR) {
-                        //console.log('success: '+response['people']+', textStatus: '+textStatus+', code: '+jqXHR.status);
+                        //console.log('success: '+response['people']+', textStatus: '+texttatus+', code: '+jqXHR.status); tableResultApi
+                        console.log(response);
+                        // Add response in Modal body
+                        $('#tableResultApi').bootstrapTable({data: [response]});
+                        // Display Modal
+                        $('#empModal').modal('show');
                         if (jqXHR.status == 200) {
                             $.ajax({
                                 url: 'http://127.0.0.1:5000/get-people',
