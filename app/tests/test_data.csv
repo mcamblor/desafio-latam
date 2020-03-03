@@ -1,9 +1,9 @@
 name,born, expected_message
-firstname11 lastname11,02-02-1982,Persona agregada a la base de datos!
-firstname21 lastname21,03-03-1983,Persona agregada a la base de datos!
-firstname31 lastname31,04-04-1984,Persona agregada a la base de datos!
-firstname41 lastname41,05-05-1985,Persona agregada a la base de datos!
-firstname51 lastname51,02-20-1980,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
-firstname61 lastname61,02/06/1986,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
-firstname71 lastname71,03/08-1987,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
-Matias Camblot,30-12-1987,Persona ya existe!
+firstname12 firstname13 lastname12 lastname13,02-02-1982,Persona agregada a la base de datos!
+firstname22 firstname23 lastname22 lastname23,03-03-1983,Persona agregada a la base de datos!
+firstname32 firstname33 lastname32 lastname33,04-04-1984,Persona agregada a la base de datos!
+firstname42 firstname43 lastname42 lastname43,05-05-1985,Persona agregada a la base de datos!
+firstname52 firstname53 lastname52 lastname53,02-20-1980,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+firstname62 firstname63 lastname62 lastname63,02/06/1986,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+firstname72 firstname73 lastname72 lastname73,03/08-1987,"Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida."
+Matias Arturo Lucca Camblot Arregui,30-12-1987,Persona ya existe!

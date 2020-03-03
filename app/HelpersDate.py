@@ -79,3 +79,18 @@ def calculate_age(born):
     except ValueError:
         age = 'Error en calculo de edad.'
     return age
+
+
+def getName(fullname):
+    if (len(fullname.split(' ')) > 3):
+        firstname = fullname.split(' ')[0]
+        indexFirstL = len(fullname.split(' ')) - 2
+        firstL = fullname.split(' ')[indexFirstL]
+    elif (len(fullname.split(' ')) == 3):
+        firstname,firstL,secondL = fullname.split(' ')
+    elif (len(fullname.split(' ')) == 2):
+        firstname,firstL = fullname.split(' ')
+    else:
+        firstname,firstL = 'Nombre no valido','Apellido no valido'
+    
+    return {'firstname':firstname,'lastname':firstL}

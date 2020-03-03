@@ -107,13 +107,14 @@
                                 },
                                 error: function(jqXHR, textStatus, errorThrown){
                                     alert('Error: '+$.parseJSON(jqXHR.responseText)['error']);
+                                    console.log($.parseJSON(jqXHR.responseText)['error']+' '+textStatus);
                                 }
                             });
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         alert('Error: '+$.parseJSON(jqXHR.responseText)['error']);
-                        console.log($.parseJSON(jqXHR.responseText)['error']);
+                        console.log($.parseJSON(jqXHR.responseText)['error']+' '+textStatus);
                     }
                 });
             });

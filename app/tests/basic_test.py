@@ -35,9 +35,9 @@ def test_get_list_users_check_one_list_is_returned():
     assert len(response_body) == 1
 
 def test_post_user_check_status_code_equals_200():
-    response = requests.post(url='http://127.0.0.1:5000/birthday',data={'name':'basic_test2 postBirthday2','born':'02-02-1930'})
+    response = requests.post(url='http://127.0.0.1:5000/birthday',data={'name':'name11 name12 postBirthday12 postBirthday12','born':'02-02-1930'})
     assert response.status_code == 200
 
 def test_post_user_check_status_code_equals_500():
-    response = requests.post(url='http://127.0.0.1:5000/birthday',data={'name':'basic_test_fail postBirthday_fail','born':'02/02/1930'})
+    response = requests.post(url='http://127.0.0.1:5000/birthday',data={'name':'basic_test_fail1 basic_test_fail2 postBirthday_fail1 postBirthday_fail2','born':'02/02/1930'})
     assert response.status_code == 500

@@ -29,11 +29,11 @@ class ServiceBirthday(Resource):
             _born = str(args['born'])
             try:
                 if isinstance(hd.validateDate(_born),str) == False:
-                    if PersonModel.find_by_name(_name.split(' ')[0],_name.split(' ')[1]):
+                    if PersonModel.find_by_name(hd.getName(_name)['firstname'],hd.getName(_name)['lastname']):
                         resp = jsonify(message='Persona ya existe!')
                         resp.status_code = 400
                     else:
-                        PersonModel.insert_into_table(_name.split(' ')[0],_name.split(' ')[1],hd.changeFormatDate(_born),hd.calculate_age(_born),hd.daysMissing(_born))
+                        PersonModel.insert_into_table(hd.getName(_name)['firstname'],hd.getName(_name)['lastname'],hd.changeFormatDate(_born),hd.calculate_age(_born),hd.daysMissing(_born))
                         resp = jsonify(message='Persona agregada a la base de datos!')
                         resp.status_code = 200
                 else:
