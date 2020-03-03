@@ -86,5 +86,5 @@ api.add_resource(AllPeople,'/get-people')
 api.add_resource(GetPeople,'/get-people-id/<string:id>')
 
 if __name__ == "__main__":
-    #create_database('{}/db/database_file.db'.format(base_dir))
+    create_database('{}/db/database_file.db'.format(base_dir))
     app.run(debug=True,host='127.0.0.1')
