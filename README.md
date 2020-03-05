@@ -20,4 +20,4 @@ Para correr test unitario del proyecto ejecutar comando:
 Revisar carpeta app/postman, donde encontrarán json con consultas a servicios.
 
 # Ver sitio
-([http://127.0.0.1/:5000])
+([http://127.0.0.1:5000])
