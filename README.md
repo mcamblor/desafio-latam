@@ -1,5 +1,5 @@
 # Desafio Latam
-Proyecto desafio latam - api rest python
+Proyecto desafio latam - api rest python, para ejecutar cualquier comando desde el terminal **(Windows/Linux/macOS)**, se debe estar posicionado en la carpeta desafio-latam
 
 # Dependencias
 Para instalar las dependencias usar el siguiente comando:

@@ -34,7 +34,13 @@ class ServiceBirthday(Resource):
                         resp.status_code = 400
                     else:
                         PersonModel.insert_into_table(hd.getName(_name)['firstname'],hd.getName(_name)['lastname'],hd.changeFormatDate(_born),hd.calculate_age(_born),hd.daysMissing(_born))
-                        resp = jsonify(message='Persona agregada a la base de datos!')
+                        resp = jsonify(
+                            firstname=hd.getName(_name)['firstname'],
+                            lastname=hd.getName(_name)['lastname'],
+                            date=hd.changeFormatDate(_born),
+                            age=hd.calculate_age(_born),
+                            text=hd.daysMissing(_born),
+                            message='Persona agregada a la base de datos!')
                         resp.status_code = 200
                 else:
                     resp = jsonify(message='Error fecha incorrecta, la fecha deberia ser DD-MM-YYYY o una valida.')
